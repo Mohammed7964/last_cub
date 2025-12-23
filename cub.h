@@ -6,7 +6,7 @@
 /*   By: mel-badd <mel-badd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/03 10:47:27 by mel-badd          #+#    #+#             */
-/*   Updated: 2025/12/21 17:38:37 by mel-badd         ###   ########.fr       */
+/*   Updated: 2025/12/23 15:32:50 by mel-badd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,9 @@
 # define WIDTH 1580
 # define FOV (M_PI / 3.0)   /* 60 degrees */
 # define T_SIZE 50
-# define MOVE_SPEED 5
+# define MOVE_SPEED 10
 # define ROT_SPEED 0.05
+#define COLLISION_BUFFER 15.0
 
 #define KEY_W        13   // 'w'
 #define KEY_A        0    // 'a'
@@ -39,6 +40,47 @@
 #define KEY_RIGHT    124  // Right Arrow
 
 #define KEY_ESC      53   // Escape
+
+typedef struct s_texture
+{
+    void    *img;
+    char    *addr;
+    int     width;
+    int     height;
+    int     bpp;
+    int     line_len;
+    int     endian;
+}   t_texture;
+
+typedef struct s_ceil_floor
+{
+    t_texture   *texture;
+    int	y;
+    int color;
+    int x_ceil;
+    int y_ceil;
+    int step;
+    double tex_pos;
+    int height_ceil;
+}     t_ceil_floor;
+
+typedef struct s_wall_tex
+{
+	int				original_wall_top;
+	int				wall_top;
+	int				wall_bottom;
+	int				height_wall;
+	int				is_vertical;
+	double			ray_angle;
+	t_texture		*texture;
+	double			wall_hit_x;
+	int				tex_x;
+	int				tex_y;
+	double			step;
+	double			tex_pos;
+	int				y;
+	int				color;
+}	t_wall_tex;
 
 typedef struct s_render
 {
@@ -52,6 +94,29 @@ typedef struct s_render
     int     is_vertical;
 }   t_render;
 
+typedef struct s_hcheck
+{
+    double intersection_x;
+	double intersection_y;
+	double check_y;
+	double step_x;
+	double step_y;
+    int f_up;
+    int f_down;
+    int iterations;
+}   t_hcheck;
+
+typedef struct s_vcheck
+{
+    double intersection_x;
+	double intersection_y;
+	double check_x;
+	double step_x;
+	double step_y;
+    int f_left;
+    int f_right;
+    int iterations;
+}   t_vcheck;
 
 typedef struct s_keys
 {
@@ -117,16 +182,14 @@ typedef struct s_ray
     t_player player;
 }   t_ray;
 
-typedef struct s_texture
+typedef struct s_weapon
 {
-    void    *img;
-    char    *addr;
-    int     width;
-    int     height;
-    int     bpp;
-    int     line_len;
-    int     endian;
-}   t_texture;
+    t_texture frames[8];  // NOT void **, but an array of t_texture structs
+    int frame_count;
+    int current;
+    int animating;
+}   t_weapon;
+
 
 typedef struct s_cub
 {
@@ -134,6 +197,8 @@ typedef struct s_cub
     char *south_texture;
     char *east_texture;
     char *west_texture;
+    char *ceil_texture;
+    char *floor_texture;
     char *nopath;
     char *sopath;
     char *espath;
@@ -144,6 +209,8 @@ typedef struct s_cub
     void        *img;
     char        *addr;
     int         bpp;
+    int map_started;
+    int map_ended;
     int         line_len;
     int         endian;
     double      size_x;
@@ -153,8 +220,6 @@ typedef struct s_cub
 
     /* Map related */
     char        *map;
-    int map_started;
-    int map_ended;
     char        **map_lines;
 
     /* Texture paths (strings) */
@@ -174,7 +239,6 @@ typedef struct s_cub
     int         F;
     int         C;
 
-    /* Player */
     t_vector    player_pos;
     t_player    player;
 
@@ -183,33 +247,27 @@ typedef struct s_cub
     t_texture   tex_south;
     t_texture   tex_east;
     t_texture   tex_west;
+    t_texture   tex_ceil;
+    t_texture   tex_floor;
+    t_weapon    weapon;
 
     /* Colors */
     int         floor_color;
-    int         ceiling_color;
+    int         ceil_color;
 
     /* Keys */
     t_keys      keys;
     t_ray       ray;
     t_casting cast;
+    t_render r;
 }   t_cub;
 
-/* Get next line functions */
-char    *creat_text(int fd, char *str);
-char    *get_current_line(char *line);
-char    *next_list(char *text);
-char    *get_next_line(int fd);
-size_t	ft_strlen(char *s);
-/* String utilities */
-char    *ft_substr(char *s, unsigned int start, size_t len);
-char    *ft_strdup(char *s1);
-char    *ft_strjoin(char *s1, char *s2);
-int	ft_atoi(const char *str);
-int     ft_strcmp(char *s1, char *s2);
-size_t  ft_strlen(char *s);
-char    **ft_split(char *s, char c);
+
+
 
 /* Parsing functions */
+size_t ft_strlen(char *str);
+char	*ft_substr(char  *s, unsigned int start, size_t len);
 void    init_cub(t_cub *cub);
 void	pad_map(char **map);
 int     pars_av(int ac, char **av);
@@ -253,15 +311,17 @@ int	can_start_map(t_cub *cub);
 int	handle_textures2(char **split, t_cub *cub);
 int check_path(char *path);
 void    find_p(t_cub *game);
-
-/* MLX functions */
+char	*ft_strjoin(char *s1, char *s2);
+char	**ft_split(char  *s, char c);
+int	ft_strcmp(char *s1, char *s2);
+void	ft_free_split(char **split);
+int	ft_atoi(const char *str);
+int	ft_split_len(char **split);
 int     len_h(char **line);
 void    mlx_initcub(t_cub *cub);
 void    failed_w(void);
 void    ft_putstr_fd(char *s, int fd);
 void    ft_putchar_fd(char c, int fd);
-
-/* Raycasting functions (angle-based) */
 void    init_player_raycasting(t_cub *cub);
 void    load_textures(t_cub *cub);
 void    load_texture(t_cub *cub, t_texture *tex, char *path);
@@ -274,16 +334,28 @@ int get_texture_color(t_texture *tex, int tex_x, int tex_y);
 void    my_mlx_pixel_put(t_cub *cub, int x, int y, int color);
 void    draw_ceiling(t_cub *cub);
 void    draw_floor(t_cub *cub);
-
-/* Input & movement helpers */
 int     key_press(int keycode, t_cub *cub);
 int     key_release(int keycode, t_cub *cub);
-void    handle_keys(t_cub *cub);            /* called every frame to apply movement */
-void    update_player(t_cub *cub);           /* update player position/angle from keys */
-void    move_player(t_cub *cub, double dir); /* dir = +1 forward, -1 backward */
-void    strafe_player(t_cub *cub, double dir); /* dir = +1 right, -1 left */
-void    rotate_player(t_cub *cub, double dir); /* dir = +1 right, -1 left */
+void    handle_keys(t_cub *cub);
+void    update_player(t_cub *cub);
+void    move_player(t_cub *cub, double dir);
+void    strafe_player(t_cub *cub, double dir);
+void    rotate_player(t_cub *cub, double dir);
 int is_wall(t_cub *cub, double x, double y);
-/* Utility */
-// static double normalize_angle(double angle);
-#endif /* CUB_H */
+double h_check(t_cub *cub, double *hit_x, double *hit_y, double angle);
+double v_check(t_cub *cub, double *hit_x, double *hit_y, double angle);
+void my_mlx_pixel_put(t_cub *data, int x, int y, int color);
+int is_wall(t_cub *cub, double x, double y);
+void	checker_ray_angle(t_render *r);
+int ft_error(char *str);
+void draw_ceiling_floor_column(t_cub *cub, int x, int wall_top, int wall_bottom);
+void	load_textures(t_cub *cub);
+void	load_texture(t_cub *cub, t_texture *tex, char *path);
+t_texture *get_wall_texture(t_cub *cub, double ray_angle, int is_vertical);
+int get_texture_color(t_texture *tex, int tex_x, int tex_y);
+void	ft_loop_tex(t_wall_tex *wt, t_render *r, t_cub *cub);
+void	render(t_cub *cub);
+void	update_weapon(t_cub *cub);
+void	draw_weapon(t_cub *cub);
+void	load_weapon(t_cub *cub);
+#endif

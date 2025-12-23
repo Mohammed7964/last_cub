@@ -6,7 +6,7 @@
 /*   By: mel-badd <mel-badd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/21 17:37:30 by mel-badd          #+#    #+#             */
-/*   Updated: 2025/12/21 17:44:08 by mel-badd         ###   ########.fr       */
+/*   Updated: 2025/12/22 17:34:27 by mel-badd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,8 @@ int	new_lines_map(t_cub *cub)
 	int	i;
 	int	end;
 
+	if (!cub || !cub->map)
+		return (0);
 	i = 0;
 	while (cub->map[i] && cub->map[i] == '\n')
 		i++;

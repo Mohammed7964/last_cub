@@ -6,7 +6,7 @@
 /*   By: mel-badd <mel-badd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/06 17:27:49 by mel-badd          #+#    #+#             */
-/*   Updated: 2025/12/21 17:45:19 by mel-badd         ###   ########.fr       */
+/*   Updated: 2025/12/23 15:43:59 by mel-badd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,13 +40,15 @@ static int	validate_rgb(char **split)
 		j = 0;
 		while (split[i][j])
 		{
-			if (!ft_isdigit(split[i][j]))
+			if (!ft_isdigit(split[i][j]) && split[i][j] != ' ')
 				return (0);
 			j++;
 		}
 		val = ft_atoi(split[i]);
-		if (val < 0 || val > 225)
+		if (val < 0 || val > 255)
+		{
 			return (0);
+		}
 		i++;
 	}
 	return (1);
@@ -58,13 +60,17 @@ int	handle_colors_str(char *color)
 	int		ret;
 
 	if (!color || count_commas(color) != 2)
+	{
+		printf("Error: Invalid color format: %s\n", color);
 		return (0);
+	}
 	split = ft_split(color, ',');
 	if (!split)
 		return (0);
 	ret = validate_rgb(split);
 	if (!ret)
 	{
+		printf("Error: Invalid RGB values in color: %s\n", color);
 		ft_free_split(split);
 		return (0);
 	}
@@ -108,7 +114,7 @@ int	number_of_char(t_cub *cub)
 			players++;
 		i++;
 	}
-	if (walls < 1 || spaces < 1 || players != 1)
+	if (walls < 1 || players != 1)
 		return (0);
 	return (1);
 }

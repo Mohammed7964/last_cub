@@ -6,7 +6,7 @@
 /*   By: mel-badd <mel-badd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/03 10:47:10 by mel-badd          #+#    #+#             */
-/*   Updated: 2025/12/21 17:40:45 by mel-badd         ###   ########.fr       */
+/*   Updated: 2025/12/23 20:37:31 by mel-badd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ static int	init_map(t_cub *cub, char *file)
 		return (0);
 	if (!pars_map(cub))
 		return (0);
-	change_space(cub);
 	if (cub->map_lines)
 	{
 		ft_free_split(cub->map_lines);
@@ -36,6 +35,7 @@ static int	init_map(t_cub *cub, char *file)
 		return (0);
 	if (!check_ziro(cub))
 		return (0);
+	change_space(cub);
 	pad_map(cub->map_lines);
 	return (1);
 }
@@ -90,10 +90,13 @@ static int	build_map_string(t_cub *cub)
 	return (1);
 }
 
+void	f(){system("leaks cub3D");}
+
 int	main(int ac, char **av)
 {
 	t_cub	cub;
 
+	atexit(f);
 	init_cub(&cub);
 	if (!pars_av(ac, av))
 	{
@@ -106,8 +109,6 @@ int	main(int ac, char **av)
 		return (printf("Error: Failed to init map\n"), EXIT_FAILURE);
 	}
 	build_map_string(&cub);
-	cub.floor_color = 0x573D32;
-	cub.ceiling_color = 0x87CEEB;
 	init_player_raycasting(&cub);
 	mlx_initcub(&cub);
 	cleanup(&cub);

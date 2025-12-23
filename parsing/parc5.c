@@ -6,7 +6,7 @@
 /*   By: mel-badd <mel-badd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/06 17:27:03 by mel-badd          #+#    #+#             */
-/*   Updated: 2025/12/21 17:45:39 by mel-badd         ###   ########.fr       */
+/*   Updated: 2025/12/23 15:14:34 by mel-badd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ int	read_map(char *av, t_cub *cub)
 	{
 		if (!process_line(cub, line))
 		{
+			printf("here\n");
 			free(line);
 			close(fd);
 			return (0);

@@ -6,7 +6,7 @@
 /*   By: mel-badd <mel-badd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/06 17:25:18 by mel-badd          #+#    #+#             */
-/*   Updated: 2025/12/21 17:09:48 by mel-badd         ###   ########.fr       */
+/*   Updated: 2025/12/23 15:43:47 by mel-badd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,35 +33,51 @@ static char	*clean_newline_str(char *str)
 
 static void	set_texture_or_color(t_cub *cub, char *key, char *value)
 {
-	if (!key || !value)
+	if (!cub || !key || !value)
 		return ;
 	if (strcmp(key, "NO") == 0)
-		cub->north_texture = value;
+		(free(cub->north_texture), cub->north_texture = value);
 	else if (strcmp(key, "SO") == 0)
-		cub->south_texture = value;
+		(free(cub->south_texture), cub->south_texture = value);
 	else if (strcmp(key, "WE") == 0)
-		cub->west_texture = value;
+		(free(cub->west_texture), cub->west_texture = value);
 	else if (strcmp(key, "EA") == 0)
-		cub->east_texture = value;
+		(free(cub->east_texture), cub->east_texture = value);
 	else if (strcmp(key, "F") == 0)
-		cub->_F = value;
+		(free(cub->_F), cub->_F = value);
 	else if (strcmp(key, "C") == 0)
-		cub->_C = value;
+		(free(cub->_C), cub->_C = value);
 	else
 		free(value);
 }
 
 void	join(t_cub *cub, char **path)
 {
-	char	*cleaned;
+	int		i;
+	char	*joined;
+	char	*tmp;
 
-	if (!path || !path[0] || !path[1])
+	if (!cub || !path || !path[0])
 		return ;
-	cleaned = ft_strdup(path[1]);
-	if (!cleaned)
+	i = 1;
+	while (path[i] && path[i][0] == '\0')
+		i++;
+	if (!path[i])
 		return ;
-	cleaned = clean_newline_str(cleaned);
-	set_texture_or_color(cub, path[0], cleaned);
+	joined = ft_strdup(path[i++]);
+	if (!joined)
+		return ;
+	while (path[i])
+	{
+		tmp = joined;
+		joined = ft_strjoin(tmp, " ");
+		free(tmp);
+		tmp = joined;
+		joined = ft_strjoin(tmp, path[i++]);
+		free(tmp);
+	}
+	joined = clean_newline_str(joined);
+	set_texture_or_color(cub, path[0], joined);
 }
 
 void	ft_free_split(char **split)

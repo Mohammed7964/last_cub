@@ -6,7 +6,7 @@
 /*   By: mel-badd <mel-badd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/03 10:47:10 by mel-badd          #+#    #+#             */
-/*   Updated: 2025/12/23 20:37:31 by mel-badd         ###   ########.fr       */
+/*   Updated: 2025/12/23 21:10:26 by mel-badd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,13 +91,42 @@ static int	build_map_string(t_cub *cub)
 }
 
 void	f(){system("leaks cub3D");}
+int parse_color(char *line, t_color *color)
+{
+    char **rgb;
+    int i;
 
+    rgb = ft_split(line, ',');
+    if (!rgb)
+        return (1);
+
+    i = 0;
+    while (rgb[i])
+        i++;
+    if (i != 3)
+        return (1);
+
+    color->r = ft_atoi(rgb[0]);
+    color->g = ft_atoi(rgb[1]);
+    color->b = ft_atoi(rgb[2]);
+
+    if (color->r < 0 || color->r > 255 ||
+        color->g < 0 || color->g > 255 ||
+        color->b < 0 || color->b > 255)
+        return (1);
+
+    color->value = (color->r << 16) | (color->g << 8) | color->b;
+
+    ft_free_split(rgb);
+    return (0);
+}
 int	main(int ac, char **av)
 {
 	t_cub	cub;
+	t_color color;
 
 	atexit(f);
-	init_cub(&cub);
+	init_cub(&cub, &color);
 	if (!pars_av(ac, av))
 	{
 		cleanup(&cub);
@@ -109,6 +138,11 @@ int	main(int ac, char **av)
 		return (printf("Error: Failed to init map\n"), EXIT_FAILURE);
 	}
 	build_map_string(&cub);
+	if (parse_color(cub._F, &color) || parse_color(cub._C, &color))
+	{
+		cleanup(&cub);
+		return (printf("Error: Invalid color format\n"), EXIT_FAILURE);
+	}
 	init_player_raycasting(&cub);
 	mlx_initcub(&cub);
 	cleanup(&cub);

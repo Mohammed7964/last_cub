@@ -6,7 +6,7 @@
 /*   By: mel-badd <mel-badd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/03 10:47:27 by mel-badd          #+#    #+#             */
-/*   Updated: 2025/12/23 15:32:50 by mel-badd         ###   ########.fr       */
+/*   Updated: 2025/12/23 21:09:32 by mel-badd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -190,6 +190,13 @@ typedef struct s_weapon
     int animating;
 }   t_weapon;
 
+typedef struct s_color
+{
+    int r;
+    int g;
+    int b;
+    int value; // packed color
+} t_color;
 
 typedef struct s_cub
 {
@@ -268,10 +275,9 @@ typedef struct s_cub
 /* Parsing functions */
 size_t ft_strlen(char *str);
 char	*ft_substr(char  *s, unsigned int start, size_t len);
-void    init_cub(t_cub *cub);
+void	init_cub(t_cub *cub, t_color *color);
 void	pad_map(char **map);
 int     pars_av(int ac, char **av);
-void init_cub(t_cub *cub);
 int	ft_isdigit(int c);
 void    init_texture(char *path, t_cub *cub);
 int     check_path(char *path);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_mlx.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: omaezzem <omaezzem@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mel-badd <mel-badd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 10:17:27 by omaezzem          #+#    #+#             */
-/*   Updated: 2025/12/07 10:41:45 by omaezzem         ###   ########.fr       */
+/*   Updated: 2025/12/23 21:55:47 by mel-badd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,13 @@ static int check_collision_fast(t_cub *cub, double x, double y)
 {
     if (is_wall(cub, x, y))
         return 1;
-    
+
     if (is_wall(cub, x + COLLISION_BUFFER, y) ||
         is_wall(cub, x - COLLISION_BUFFER, y) ||
         is_wall(cub, x, y + COLLISION_BUFFER) ||
         is_wall(cub, x, y - COLLISION_BUFFER))
         return 1;
-    
+
     return 0;
 }
 

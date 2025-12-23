@@ -6,7 +6,7 @@
 /*   By: mel-badd <mel-badd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/03 10:47:27 by mel-badd          #+#    #+#             */
-/*   Updated: 2025/12/23 21:09:32 by mel-badd         ###   ########.fr       */
+/*   Updated: 2025/12/23 22:15:36 by mel-badd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -195,7 +195,8 @@ typedef struct s_color
     int r;
     int g;
     int b;
-    int value; // packed color
+    int value_C; // packed color
+    int value_F; // packed color
 } t_color;
 
 typedef struct s_cub
@@ -265,6 +266,7 @@ typedef struct s_cub
     /* Keys */
     t_keys      keys;
     t_ray       ray;
+    t_color      color;
     t_casting cast;
     t_render r;
 }   t_cub;
@@ -275,7 +277,7 @@ typedef struct s_cub
 /* Parsing functions */
 size_t ft_strlen(char *str);
 char	*ft_substr(char  *s, unsigned int start, size_t len);
-void	init_cub(t_cub *cub, t_color *color);
+void	init_cub(t_cub *cub);
 void	pad_map(char **map);
 int     pars_av(int ac, char **av);
 int	ft_isdigit(int c);
@@ -287,6 +289,8 @@ void    join(t_cub *cub, char **path);
 int     read_map(char *av, t_cub *cub);
 int handle_colors_str(char *color);
 int number_of_char(t_cub *cub);
+int	parse_color_c(char *line, t_color *color);
+int	parse_color_f(char *line, t_color *color);
 int pars_av(int ac, char **av);
 void init_texture(char *path, t_cub *cub);
 int     handle_colors_F(t_cub *cub);
@@ -360,6 +364,7 @@ void	load_texture(t_cub *cub, t_texture *tex, char *path);
 t_texture *get_wall_texture(t_cub *cub, double ray_angle, int is_vertical);
 int get_texture_color(t_texture *tex, int tex_x, int tex_y);
 void	ft_loop_tex(t_wall_tex *wt, t_render *r, t_cub *cub);
+char	*ft_strtrim(char *s1, char *set);
 void	render(t_cub *cub);
 void	update_weapon(t_cub *cub);
 void	draw_weapon(t_cub *cub);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: omaezzem <omaezzem@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mel-badd <mel-badd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/24 15:37:22 by omaezzem          #+#    #+#             */
-/*   Updated: 2025/12/10 16:06:07 by omaezzem         ###   ########.fr       */
+/*   Updated: 2025/12/23 22:10:36 by mel-badd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,8 +124,6 @@ void	draw_frame(t_cub *cub)
 	r.projection_distance = (WIDTH / 2.0) / tan(FOV / 2.0);
 	r.i = 0;
 	ft_loop_ray(&r, cub);
-	update_weapon(cub);
-	draw_weapon(cub);
 	mlx_put_image_to_window(cub->mlx, cub->window, cub->img, 0, 0);
 	mlx_destroy_image(cub->mlx, cub->img);
 }

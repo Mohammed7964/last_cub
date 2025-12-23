@@ -6,7 +6,7 @@
 /*   By: mel-badd <mel-badd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/06 17:30:32 by mel-badd          #+#    #+#             */
-/*   Updated: 2025/12/21 15:14:28 by mel-badd         ###   ########.fr       */
+/*   Updated: 2025/12/23 22:14:14 by mel-badd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,4 +63,60 @@ int	check_maps(char **map)
 	if (map[1][i] == '0')
 		return (0);
 	return (1);
+}
+
+int	parse_color_f(char *line, t_color *color)
+{
+	char	**rgb;
+	int		i;
+	char	*tmp;
+
+	tmp = ft_strtrim(line, " \n");
+	rgb = ft_split(tmp, ',');
+	free(tmp);
+	if (!rgb)
+		return (1);
+	i = 0;
+	while (rgb[i])
+		i++;
+	if (i != 3)
+		return (1);
+	color->r = ft_atoi(rgb[0]);
+	color->g = ft_atoi(rgb[1]);
+	color->b = ft_atoi(rgb[2]);
+	if (color->r < 0 || color->r > 255
+		|| color->g < 0 || color->g > 255
+		|| color->b < 0 || color->b > 255)
+		return (1);
+	color->value_F = (color->r << 16) | (color->g << 8) | color->b;
+	ft_free_split(rgb);
+	return (0);
+}
+
+int	parse_color_c(char *line, t_color *color)
+{
+	char	**rgb;
+	int		i;
+	char	*tmp;
+
+	tmp = ft_strtrim(line, " \n");
+	rgb = ft_split(tmp, ',');
+	free(tmp);
+	if (!rgb)
+		return (1);
+	i = 0;
+	while (rgb[i])
+		i++;
+	if (i != 3)
+		return (1);
+	color->r = ft_atoi(rgb[0]);
+	color->g = ft_atoi(rgb[1]);
+	color->b = ft_atoi(rgb[2]);
+	if (color->r < 0 || color->r > 255
+		|| color->g < 0 || color->g > 255
+		|| color->b < 0 || color->b > 255)
+		return (1);
+	color->value_C = (color->r << 16) | (color->g << 8) | color->b;
+	ft_free_split(rgb);
+	return (0);
 }

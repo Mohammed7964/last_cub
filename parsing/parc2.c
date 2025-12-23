@@ -6,13 +6,13 @@
 /*   By: mel-badd <mel-badd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/06 17:21:14 by mel-badd          #+#    #+#             */
-/*   Updated: 2025/12/23 21:07:40 by mel-badd         ###   ########.fr       */
+/*   Updated: 2025/12/23 22:15:54 by mel-badd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub.h"
 
-void	init_cub(t_cub *cub, t_color *color)
+void	init_cub(t_cub *cub)
 {
 	cub->map = NULL;
 	cub->texture = NULL;
@@ -29,10 +29,11 @@ void	init_cub(t_cub *cub, t_color *color)
 	cub->map_lines = NULL;
 	cub->_F = NULL;
 	cub->_C = NULL;
-	color->r = 0;
-	color->g = 0;
-	color->b = 0;
-	color->value = 0;
+	cub->color.r = 0;
+	cub->color.g = 0;
+	cub->color.b = 0;
+	cub->color.value_C = 0;
+	cub->color.value_F = 0;
 }
 
 int	pars_av(int ac, char **av)

@@ -1,10 +1,10 @@
-NO imgs/CRATE_1D.xpm
-SO imgs/DOOR_1A.xpm
-WE imgs/DOOR_1E.xpm
-EA imgs/DOOR_1E.xpm
+NO imgs/d-pixel-art-night-village-317499370.xpm
+SO imgs/d-pixel-art-night-village-317499405.xpm
+WE imgs/pixel-art-village-night-under-starry-sky-trees-houses-flowers-digital-painting-380524559.xpm
+EA imgs/d-pixel-art-night-village-317499395.xpm
 
-F 255,0,0
-C 225,3,0
+F 15, 25, 50
+C 25, 40, 75
 
         1111111111111111111111111
         1000000000110000000000001

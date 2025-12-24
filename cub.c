@@ -6,7 +6,7 @@
 /*   By: mel-badd <mel-badd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/03 10:47:10 by mel-badd          #+#    #+#             */
-/*   Updated: 2025/12/23 22:15:14 by mel-badd         ###   ########.fr       */
+/*   Updated: 2025/12/24 15:06:50 by mel-badd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static int	init_map(t_cub *cub, char *file)
 		return (0);
 	if (!new_lines_map(cub))
 		return (0);
-	if (!handle_colors_str(cub->_F) || !handle_colors_str(cub->_C))
+	if (!handle_colors_str(cub->_f) || !handle_colors_str(cub->_c))
 		return (0);
 	if (!pars_map(cub))
 		return (0);
@@ -98,18 +98,18 @@ int	main(int ac, char **av)
 	if (!pars_av(ac, av))
 	{
 		cleanup(&cub);
-		return (printf("Error: Invalid arguments\n"), EXIT_FAILURE);
+		return (printf("Error:\n Invalid arguments\n"), EXIT_FAILURE);
 	}
 	if (!init_map(&cub, av[1]))
 	{
 		cleanup(&cub);
-		return (printf("Error: Failed to init map\n"), EXIT_FAILURE);
+		return (printf("Error:\n Failed to init map\n"), EXIT_FAILURE);
 	}
 	build_map_string(&cub);
-	if (parse_color_c(cub._C, &cub.color))
-		return (printf("Error: Invalid color format\n"), EXIT_FAILURE);
-	if (parse_color_f(cub._F, &cub.color))
-		return (printf("Error: Invalid color format\n"), EXIT_FAILURE);
+	if (parse_color_c(cub._c, &cub.color))
+		return (printf("Error:\n Invalid color format\n"), EXIT_FAILURE);
+	if (parse_color_f(cub._f, &cub.color))
+		return (printf("Error:\n Invalid color format\n"), EXIT_FAILURE);
 	init_player_raycasting(&cub);
 	mlx_initcub(&cub);
 	cleanup(&cub);

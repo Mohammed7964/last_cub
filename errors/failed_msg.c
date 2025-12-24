@@ -6,13 +6,13 @@
 /*   By: mel-badd <mel-badd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/13 14:26:21 by omaezzem          #+#    #+#             */
-/*   Updated: 2025/12/06 17:05:44 by mel-badd         ###   ########.fr       */
+/*   Updated: 2025/12/23 23:42:33 by mel-badd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub.h"
 
-void	failed_w()
+void	failed_w(void)
 {
 	ft_putstr_fd("Error\n🛑 Failed to create window\n", 2);
 	exit(1);

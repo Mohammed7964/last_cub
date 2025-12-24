@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parc6.c                                            :+:      :+:    :+:   */
+/*   pars6.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mel-badd <mel-badd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/06 17:27:49 by mel-badd          #+#    #+#             */
-/*   Updated: 2025/12/23 15:43:59 by mel-badd         ###   ########.fr       */
+/*   Updated: 2025/12/24 15:07:32 by mel-badd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,17 +60,13 @@ int	handle_colors_str(char *color)
 	int		ret;
 
 	if (!color || count_commas(color) != 2)
-	{
-		printf("Error: Invalid color format: %s\n", color);
 		return (0);
-	}
 	split = ft_split(color, ',');
 	if (!split)
 		return (0);
 	ret = validate_rgb(split);
 	if (!ret)
 	{
-		printf("Error: Invalid RGB values in color: %s\n", color);
 		ft_free_split(split);
 		return (0);
 	}

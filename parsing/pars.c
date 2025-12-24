@@ -6,7 +6,7 @@
 /*   By: mel-badd <mel-badd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 09:36:42 by omaezzem          #+#    #+#             */
-/*   Updated: 2025/12/21 17:41:16 by mel-badd         ###   ########.fr       */
+/*   Updated: 2025/12/24 15:03:32 by mel-badd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,18 @@ void	cleanup(t_cub *cub)
 	free(cub->south_texture);
 	free(cub->west_texture);
 	free(cub->east_texture);
-	free(cub->_F);
-	free(cub->_C);
+	free(cub->_f);
+	free(cub->_c);
+}
+
+int	is_map_line(char *line)
+{
+	int	i;
+
+	i = 0;
+	while (line[i] == ' ' || line[i] == '\t')
+		i++;
+	if (line[i] == '1' || line[i] == '0')
+		return (1);
+	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: mel-badd <mel-badd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/24 15:37:22 by omaezzem          #+#    #+#             */
-/*   Updated: 2025/12/23 22:10:36 by mel-badd         ###   ########.fr       */
+/*   Updated: 2025/12/23 23:46:21 by mel-badd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,6 @@ void	ft_loop_ray(t_render *r, t_cub *cub)
 {
 	while (r->i < WIDTH)
 	{
-
 		r->ray_angle = cub->player.angle - (FOV / 2.0)
 			+ ((double)r->i * FOV / (double)WIDTH);
 		checker_ray_angle(r);
@@ -120,7 +119,6 @@ void	draw_frame(t_cub *cub)
 		mlx_destroy_image(cub->mlx, cub->img);
 		exit(ft_error("mlx_get_data_addr failed"));
 	}
-
 	r.projection_distance = (WIDTH / 2.0) / tan(FOV / 2.0);
 	r.i = 0;
 	ft_loop_ray(&r, cub);

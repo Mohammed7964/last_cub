@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   intersections_check.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: omaezzem <omaezzem@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mel-badd <mel-badd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/07 11:51:18 by omaezzem          #+#    #+#             */
-/*   Updated: 2025/12/10 16:11:01 by omaezzem         ###   ########.fr       */
+/*   Updated: 2025/12/24 14:15:11 by mel-badd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ double	ft_calcul_vitaghors(t_cub *cub, double hit_x, double hit_y)
 static double	h_iteration_f(t_hcheck *h, t_cub *cub,
 		double *hit_x, double *hit_y)
 {
-	while (h->iterations++ < 1000)
+	while (h->iterations++ < cub->ray.map_x)
 	{
 		if (h->f_up)
 			h->check_y = h->intersection_y - 1;
@@ -45,7 +45,7 @@ static double	h_iteration_f(t_hcheck *h, t_cub *cub,
 		h->intersection_x += h->step_x;
 		h->intersection_y += h->step_y;
 	}
-	return (1e30);
+	return (INT_MAX);
 }
 
 double	h_check(t_cub *cub, double *hit_x, double *hit_y, double angle)
@@ -69,7 +69,7 @@ double	h_check(t_cub *cub, double *hit_x, double *hit_y, double angle)
 
 double	v_iteration_f(t_vcheck *v, t_cub *cub, double *hit_x, double *hit_y)
 {
-	while (v->iterations++ < 1000)
+	while (v->iterations++ < cub->ray.map_x)
 	{
 		if (v->f_left)
 			v->check_x = v->intersection_x - 1;
@@ -89,7 +89,7 @@ double	v_iteration_f(t_vcheck *v, t_cub *cub, double *hit_x, double *hit_y)
 		v->intersection_x += v->step_x;
 		v->intersection_y += v->step_y;
 	}
-	return (1e30);
+	return (INT_MAX);
 }
 
 double	v_check(t_cub *cub, double *hit_x, double *hit_y, double angle)

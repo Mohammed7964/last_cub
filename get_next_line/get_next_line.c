@@ -6,7 +6,7 @@
 /*   By: mel-badd <mel-badd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 23:36:03 by mel-badd          #+#    #+#             */
-/*   Updated: 2025/12/21 17:05:37 by mel-badd         ###   ########.fr       */
+/*   Updated: 2025/12/23 23:45:39 by mel-badd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,7 @@ char	*creat_text(int fd, char *text)
 		char_read = read(fd, buffer, BUFFER_SIZE);
 		if (char_read < 0)
 		{
-			free(buffer);
-			free(text);
+			(free(buffer), free(text));
 			return (NULL);
 		}
 		buffer[char_read] = '\0';

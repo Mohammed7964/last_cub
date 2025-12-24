@@ -6,7 +6,7 @@
 /*   By: mel-badd <mel-badd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/06 17:30:32 by mel-badd          #+#    #+#             */
-/*   Updated: 2025/12/23 22:14:14 by mel-badd         ###   ########.fr       */
+/*   Updated: 2025/12/23 23:37:15 by mel-badd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ int	parse_color_f(char *line, t_color *color)
 		|| color->g < 0 || color->g > 255
 		|| color->b < 0 || color->b > 255)
 		return (1);
-	color->value_F = (color->r << 16) | (color->g << 8) | color->b;
+	color->value_f = (color->r << 16) | (color->g << 8) | color->b;
 	ft_free_split(rgb);
 	return (0);
 }
@@ -116,7 +116,7 @@ int	parse_color_c(char *line, t_color *color)
 		|| color->g < 0 || color->g > 255
 		|| color->b < 0 || color->b > 255)
 		return (1);
-	color->value_C = (color->r << 16) | (color->g << 8) | color->b;
+	color->value_c = (color->r << 16) | (color->g << 8) | color->b;
 	ft_free_split(rgb);
 	return (0);
 }

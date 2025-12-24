@@ -6,7 +6,7 @@
 /*   By: mel-badd <mel-badd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/10 15:15:56 by omaezzem          #+#    #+#             */
-/*   Updated: 2025/12/23 21:56:32 by mel-badd         ###   ########.fr       */
+/*   Updated: 2025/12/23 23:37:23 by mel-badd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,13 @@ void	draw_ceiling_floor_column(t_cub *cub, int x,
 	y = 0;
 	while (y < wall_top && y < HEIGHT)
 	{
-		my_mlx_pixel_put(cub, x, y, cub->color.value_C);
+		my_mlx_pixel_put(cub, x, y, cub->color.value_c);
 		y++;
 	}
 	y = wall_bottom;
 	while (y < HEIGHT)
 	{
-		my_mlx_pixel_put(cub, x, y, cub->color.value_F);
+		my_mlx_pixel_put(cub, x, y, cub->color.value_f);
 		y++;
 	}
 }

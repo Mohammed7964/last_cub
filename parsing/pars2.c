@@ -6,7 +6,7 @@
 /*   By: mel-badd <mel-badd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/06 17:21:14 by mel-badd          #+#    #+#             */
-/*   Updated: 2025/12/23 22:15:54 by mel-badd         ###   ########.fr       */
+/*   Updated: 2025/12/23 23:35:20 by mel-badd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,24 +16,24 @@ void	init_cub(t_cub *cub)
 {
 	cub->map = NULL;
 	cub->texture = NULL;
-	cub->NO = 0;
-	cub->SO = 0;
-	cub->WE = 0;
-	cub->EA = 0;
-	cub->F = 0;
-	cub->C = 0;
+	cub->no = 0;
+	cub->so = 0;
+	cub->we = 0;
+	cub->ea = 0;
+	cub->f = 0;
+	cub->c = 0;
 	cub->north_texture = NULL;
 	cub->south_texture = NULL;
 	cub->west_texture = NULL;
 	cub->east_texture = NULL;
 	cub->map_lines = NULL;
-	cub->_F = NULL;
-	cub->_C = NULL;
+	cub->_f = NULL;
+	cub->_c = NULL;
 	cub->color.r = 0;
 	cub->color.g = 0;
 	cub->color.b = 0;
-	cub->color.value_C = 0;
-	cub->color.value_F = 0;
+	cub->color.value_c = 0;
+	cub->color.value_f = 0;
 }
 
 int	pars_av(int ac, char **av)
@@ -53,17 +53,17 @@ int	pars_av(int ac, char **av)
 void	init_texture(char *path, t_cub *cub)
 {
 	if (ft_strcmp(path, "NO") == 0)
-		cub->NO += 1;
+		cub->no += 1;
 	else if (ft_strcmp(path, "SO") == 0)
-		cub->SO += 1;
+		cub->so += 1;
 	else if (ft_strcmp(path, "WE") == 0)
-		cub->WE += 1;
+		cub->we += 1;
 	else if (ft_strcmp(path, "EA") == 0)
-		cub->EA += 1;
+		cub->ea += 1;
 	else if (ft_strcmp(path, "F") == 0)
-		cub->F += 1;
+		cub->f += 1;
 	else if (ft_strcmp(path, "C") == 0)
-		cub->C += 1;
+		cub->c += 1;
 }
 
 int	check_path(char *path)

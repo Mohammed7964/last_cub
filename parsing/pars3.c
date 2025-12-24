@@ -6,7 +6,7 @@
 /*   By: mel-badd <mel-badd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/06 17:23:46 by mel-badd          #+#    #+#             */
-/*   Updated: 2025/12/23 15:40:18 by mel-badd         ###   ########.fr       */
+/*   Updated: 2025/12/23 23:35:43 by mel-badd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,8 @@ int	handle_textures2(char **split, t_cub *cub)
 
 int	can_start_map(t_cub *cub)
 {
-	if (cub->NO == 1 && cub->SO == 1 && cub->WE == 1
-		&& cub->EA == 1 && cub->F == 1 && cub->C == 1)
+	if (cub->no == 1 && cub->so == 1 && cub->we == 1
+		&& cub->ea == 1 && cub->f == 1 && cub->c == 1)
 		return (1);
 	return (0);
 }

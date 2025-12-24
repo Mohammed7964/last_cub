@@ -6,7 +6,7 @@
 /*   By: mel-badd <mel-badd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/06 17:25:18 by mel-badd          #+#    #+#             */
-/*   Updated: 2025/12/23 15:43:47 by mel-badd         ###   ########.fr       */
+/*   Updated: 2025/12/23 23:36:00 by mel-badd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,9 @@ static void	set_texture_or_color(t_cub *cub, char *key, char *value)
 	else if (strcmp(key, "EA") == 0)
 		(free(cub->east_texture), cub->east_texture = value);
 	else if (strcmp(key, "F") == 0)
-		(free(cub->_F), cub->_F = value);
+		(free(cub->_f), cub->_f = value);
 	else if (strcmp(key, "C") == 0)
-		(free(cub->_C), cub->_C = value);
+		(free(cub->_c), cub->_c = value);
 	else
 		free(value);
 }

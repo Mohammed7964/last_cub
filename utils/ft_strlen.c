@@ -6,18 +6,20 @@
 /*   By: mel-badd <mel-badd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/06 17:20:19 by mel-badd          #+#    #+#             */
-/*   Updated: 2025/12/06 17:20:24 by mel-badd         ###   ########.fr       */
+/*   Updated: 2025/12/23 23:47:07 by mel-badd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub.h"
 
-size_t ft_strlen(char *str)
+size_t	ft_strlen(char *str)
 {
-	int i = 0;
+	int	i;
+
+	i = 0;
 	while (str[i])
 	{
 		i++;
 	}
-	return i;
+	return (i);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: omaezzem <omaezzem@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mel-badd <mel-badd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 10:59:59 by omaezzem          #+#    #+#             */
-/*   Updated: 2025/09/13 14:29:15 by omaezzem         ###   ########.fr       */
+/*   Updated: 2025/12/23 23:47:41 by mel-badd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,16 +22,17 @@ int	len_h(char **line)
 	return (i);
 }
 
-size_t ft_strlenn(char *str)
+size_t	ft_strlenn(char *str)
 {
-	int i = 0;
+	int	i;
+
+	i = 0;
 	while (str[i])
 	{
 		i++;
 	}
-	return i;
+	return (i);
 }
-
 
 void	ft_putchar_fd(char c, int fd)
 {

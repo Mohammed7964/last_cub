@@ -6,7 +6,7 @@
 /*   By: mel-badd <mel-badd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/10 15:13:11 by omaezzem          #+#    #+#             */
-/*   Updated: 2025/12/23 22:10:31 by mel-badd         ###   ########.fr       */
+/*   Updated: 2025/12/25 15:32:58 by mel-badd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,7 @@ void	load_textures(t_cub *cub)
 {
 	if (!cub->north_texture || !cub->south_texture
 		|| !cub->east_texture || !cub->west_texture)
-	{
-		ft_putstr_fd("Error\nMissing texture paths\n", 2);
 		exit(EXIT_FAILURE);
-	}
 	if (cub->north_texture)
 		load_texture(cub, &cub->tex_north, cub->north_texture);
 	if (cub->south_texture)
@@ -32,8 +29,12 @@ void	load_textures(t_cub *cub)
 
 void	load_texture(t_cub *cub, t_texture *tex, char *path)
 {
-	tex->img = mlx_xpm_file_to_image(cub->mlx, path,
+	char	*tmp;
+
+	tmp = ft_strtrim(path, " ");
+	tex->img = mlx_xpm_file_to_image(cub->mlx, tmp,
 			&tex->width, &tex->height);
+	free(tmp);
 	if (!tex->img)
 	{
 		ft_putstr_fd("Error\nFailed to load texture: ", 2);

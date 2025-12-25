@@ -6,7 +6,7 @@
 /*   By: mel-badd <mel-badd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/06 17:58:42 by mel-badd          #+#    #+#             */
-/*   Updated: 2025/12/06 17:58:46 by mel-badd         ###   ########.fr       */
+/*   Updated: 2025/12/25 14:32:54 by mel-badd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,4 +38,16 @@ int	ft_atoi(const char *str)
 			return (0);
 	}
 	return (r * s);
+}
+
+int	ft_split_len(char **split)
+{
+	int	len;
+
+	len = 0;
+	if (!split)
+		return (0);
+	while (split[len])
+		len++;
+	return (len);
 }

@@ -6,7 +6,7 @@
 /*   By: mel-badd <mel-badd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/06 17:27:49 by mel-badd          #+#    #+#             */
-/*   Updated: 2025/12/24 15:07:32 by mel-badd         ###   ########.fr       */
+/*   Updated: 2025/12/25 14:34:15 by mel-badd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,29 +26,46 @@ static int	count_commas(char *str)
 	return (i);
 }
 
+static int	parse_rgb_value(char *s)
+{
+	long	val;
+	int		i;
+
+	i = 0;
+	val = 0;
+	while (s[i] == ' ')
+		i++;
+	if (!ft_isdigit(s[i]))
+		return (-1);
+	while (ft_isdigit(s[i]))
+	{
+		val = val * 10 + (s[i] - '0');
+		if (val > 255)
+			return (-1);
+		i++;
+	}
+	while (s[i])
+	{
+		if (s[i] != ' ')
+			return (-1);
+		i++;
+	}
+	return ((int)val);
+}
+
 static int	validate_rgb(char **split)
 {
 	int	i;
 	int	val;
-	int	j;
 
 	i = 0;
 	while (i < 3)
 	{
 		if (!split[i])
 			return (0);
-		j = 0;
-		while (split[i][j])
-		{
-			if (!ft_isdigit(split[i][j]) && split[i][j] != ' ')
-				return (0);
-			j++;
-		}
-		val = ft_atoi(split[i]);
-		if (val < 0 || val > 255)
-		{
+		val = parse_rgb_value(split[i]);
+		if (val < 0)
 			return (0);
-		}
 		i++;
 	}
 	return (1);
@@ -72,18 +89,6 @@ int	handle_colors_str(char *color)
 	}
 	ft_free_split(split);
 	return (ret);
-}
-
-int	ft_split_len(char **split)
-{
-	int	len;
-
-	len = 0;
-	if (!split)
-		return (0);
-	while (split[len])
-		len++;
-	return (len);
 }
 
 int	number_of_char(t_cub *cub)

@@ -6,7 +6,7 @@
 /*   By: mel-badd <mel-badd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/03 10:47:27 by mel-badd          #+#    #+#             */
-/*   Updated: 2025/12/24 16:50:47 by mel-badd         ###   ########.fr       */
+/*   Updated: 2025/12/25 15:42:32 by mel-badd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -284,6 +284,7 @@ void		move_left(t_cub *cub);
 void		join(t_cub *cub, char **path);
 void		cleanup(t_cub *cub);
 int			close_window(t_cub *cub);
+int			ft_split_len(char **split);
 int			pars_map(t_cub *cub);
 int			handle_empty_line(t_cub *cub, char *line);
 int			check_maps(char **map);
